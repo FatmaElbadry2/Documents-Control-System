@@ -15,8 +15,24 @@ def Index():
     cur = mysql.connection.cursor()
     cur.execute("SELECT  * FROM employee")
     data = cur.fetchall()
+    employees=[]
+    for i in range(len(employees)):
+            id = employees[i][0]
+            f_name = employees[i][1]
+            l_name = employees[i][2]
+            dataDict = {
+                "id": id,
+                "f_name": f_name,
+                "l_name": l_name
+            }
+            employees.append(dataDict)
+
     cur.close()
-    return jsonify(data)
+    return jsonify(dataDict)
+
+
+
+
 
 @app.route('/insert/', methods=['POST'])
 def insert():
@@ -59,9 +75,8 @@ def delete():
     return jsonify({'status': 'deleted succefully'})
 
 
-
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
 
 
 
